@@ -48,7 +48,7 @@ class NetworkDataExtract():
         
 
 if __name__=="__main__":
-    File_path=r"Network_data\phisingData.csv"
+    File_path=os.path.join("Network_data","phisingData.csv")
     database="Pulak"
     collection="Network_data"
     obj=NetworkDataExtract()
