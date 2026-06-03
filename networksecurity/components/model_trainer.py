@@ -16,6 +16,8 @@ from sklearn.metrics import r2_score
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.ensemble import RandomForestClassifier,AdaBoostClassifier,GradientBoostingClassifier
 import mlflow
+import dagshub
+dagshub.init(repo_owner='Pulak5', repo_name='Cybersecurity_mlproject', mlflow=True)
 
 class ModelTrainer:
     def __init__(self,model_trainer_config:ModelTrainerConfig,data_transformation_artifact:DataTransformationArtifacts):
@@ -93,7 +95,9 @@ class ModelTrainer:
             os.makedirs(model_dir_path,exist_ok=True)
 
             Network_Model=NetworkModel(preprocessor=preprocessor,model=best_model)
-            save_object(file_path=self.model_trainer_config.trained_model_file_path,obj=NetworkModel)
+            save_object(file_path=self.model_trainer_config.trained_model_file_path,obj=Network_Model)
+
+            save_object("final_models/model.pkl",best_model)
 
             model_trainer_artifact=ModelTrainerArtifact(trained_model_file_path=self.model_trainer_config.trained_model_file_path,trained_metric_artifact=classification_train_metric,test_metric_artifact=classification_test_metric)
 

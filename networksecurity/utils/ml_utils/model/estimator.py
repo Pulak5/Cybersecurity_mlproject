@@ -13,6 +13,8 @@ class NetworkModel:
     
     def predict(self,x):
         try:
+            print("Preprocessor Type:", type(self.preprocessor))
+            print("Model Type:", type(self.model))
             x_transform=self.preprocessor.transform(x)
             y_hat=self.model.predict(x_transform)
             return y_hat
